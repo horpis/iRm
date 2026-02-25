@@ -4,3 +4,25 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+# Async runtime (критично для LSP, чтобы не блокировать UI)
+tokio = { version = "1", features = ["full", "macros", "process"] }
+
+# TUI
+ratatui = "0.24"
+crossterm = "0.27"
+
+# LSP Client
+lsp-types = "0.94"         # Типы данных LSP
+tower-lsp = "0.20"         # Или lsp-server + ручная реализация RPC
+serde_json = "1.0"         # Сериализация JSON-RPC
+
+# Plugin System (Dynamic Loading)
+libloading = "0.8"         # Безопасная обертка над dlopen (Linux/BSD)
+# Для изоляции можно рассмотреть wasmtime/wasmer, но начнем с нативных .so
+
+# Text & Utils
+ropey = "1.6"              # Эффективная работа с текстом
+clap = { version = "4.4", features = ["derive"] }
+tracing = "0.1"            # Структурированное логгирование (важно для отладки LSP)
+anyhow = "1.0"
+
